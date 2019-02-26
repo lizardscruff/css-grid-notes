@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../assets/style.css">
+  <title>Sizing Tracks in CSS Grid!</title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+    <div class="item">4</div>
+    <div class="item">5</div>
+    <div class="item">6</div>
+    <div class="item">7</div>
+    <div class="item">8</div>
+    <div class="item">9</div>
+    <div class="item">10</div>
+    <div class="item">11</div>
+    <div class="item">12</div>
+    <div class="item">13</div>
+    <div class="item">14</div>
+    <div class="item">15</div>
+  </div>
+
+  <style>
+    .container {
+      display: grid;
+      grid-gap: 20px;
+      border: 20px solid var(--yellow);
+    /* fractional unit: fr */
+    /* kind of stands more for like free space because it takes up the
+    free extra space. 2fr takes up 2 times as much as the 1fr */
+      grid-template-columns: 2fr 200px 1fr;
+    
+    /* so instead of doing 25% 25% 25% 25% */
+    /* use: */
+    /* grid-template-columns: 1fr 1fr 1fr 1fr; */
+
+    /* in this example auto will just fill up the remaining space */
+    /* mostly noticable if you put text into the grid item */
+    grid-template-columns: 1fr 2fr auto;
+    
+    /* you have to set a hard height for grid-template-rows to work */
+      height: 600px;
+      grid-template-rows: 1fr 10fr;
+
+    }
+  </style>
+</body>
+<!-- try to stick to rems and frs in most cases -->
+</html>

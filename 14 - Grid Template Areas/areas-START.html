@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../assets/style.css">
+  <title>Grid Template Areas</title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="item item1">
+      <p>I'm Sidebar #1</p>
+    </div>
+    <div class="item item2">
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore, sed.</p>
+      <p>Lorem ipsum d</p>
+    </div>
+    <div class="item item3">
+      <p>I'm Sidebar #2</p>
+    </div>
+    <div class="item footer">
+      <p>I'm the footer</p>
+    </div>
+  </div>
+
+  <style>
+    .container {
+      display: grid;
+      grid-gap: 20px;
+      grid-template-columns: 1fr 10fr 1fr;
+      grid-template-rows: 150px 150px 100px;
+      /* open up dev tools and you'll see what this does */
+      /* make sure Display area names is checked */
+      /* "." will leave the name blank */
+      /* spacing everything in the code is optional but useful
+      for visualization purposes */
+      grid-template-areas: 
+        "sidebar-1  content   sidebar-2"
+        "sidebar-1  content   sidebar-2"
+        "footer     footer    footer";
+    }
+
+    /* and bam! it puts the div classed footer and puts it in the footer area */
+    .footer {
+      grid-area: footer;
+    }
+
+    .item1 {
+      grid-area: sidebar-1;
+    }
+
+    .item2 {
+      grid-area: content;
+    }
+
+    .item3 {
+      grid-area: sidebar-2;
+    }
+
+    /* the useful thing about this is that you can add media queries to 
+    rearrange things as the size changes */
+    @media (max-width: 700px) {
+      .container {
+        grid-template-areas: 
+        "content    content   content"
+        "sidebar-1  sidebar-1 sidebar-2"
+        "footer     footer    footer";
+      }
+    }
+
+
+
+  </style>
+</body>
+
+</html>

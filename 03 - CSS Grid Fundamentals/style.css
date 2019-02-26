@@ -1,0 +1,25 @@
+/* this makes all of the container's children into grid items */
+.container {
+    display: grid;
+    /* takes what's inside the container and forms it into 3 columns
+        with each column 100px wide */
+    /* you can of course make them all different sizes or rems/auto/fr */
+    /* grid-template-columns: 100px 100px 100px; */
+    /* alternatively you can use this function:
+        grid-template-columns: repeat(3, 100px); */
+
+    /* here's a great example of auto where auto will take up
+        the remaining space to fill the page: */
+    /* grid-template-columns: 100px auto 300px 50px; */
+
+    /* if you do all by itself without columns: */
+    /* grid-template-rows: 200px 100px 400px; */
+    /* the items will fill the width of the page automatically */
+
+    /* put both together and you make a proper grid: */
+    grid-template-columns: 200px 500px; 
+    grid-template-rows: 200px 100px 400px;
+
+    /* this adds space between your grid "tracks" */
+    grid-gap: 20px;
+}

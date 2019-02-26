@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../assets/style.css">
+  <title>CSS grid-auto-flow Explained!</title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+    <div class="item">3</div>
+    <div class="item">3</div>
+    <div class="item">3</div>
+    <div class="item">3</div>
+    <div class="item">3</div>
+    <div class="item">3</div>
+    <div class="item">3</div>
+    <div class="item">3</div>
+  </div>
+
+  <style>
+    .container {
+      display: grid;
+      grid-gap: 20px;
+      grid-template-columns: 400px 200px;
+
+      /* this forces the wrap to flow into columns */
+      /* usually the 3rd container item would just wrap under the 1st
+      since grid-template-columns only has two columns designated */
+      grid-auto-flow: column;
+
+      /* I just duplicated a bunch of those divs up there */
+      /* they are implicit columns so every implicit column 
+      will be 200px with this: */
+      grid-auto-columns: 200px;
+    }
+  </style>
+</body>
+
+</html>
