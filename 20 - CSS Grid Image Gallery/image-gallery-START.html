@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>CSS Grid Image Gallery!</title>
+</head>
+
+<body>
+
+  <div class="overlay">
+    <div class="overlay-inner">
+      <button class="close">× Close</button>
+      <img>
+    </div>
+  </div>
+
+  <section class="gallery">
+  </section>
+
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      padding: 50px;
+      font-family: sans-serif;
+      background: linear-gradient(to right, #F93D66, #6D47D9);
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      margin: 0 0 5px 0;
+    }
+
+    p {
+      margin: 0 0 20px 0;
+    }
+
+    .close {
+      background: none;
+      color: white;
+      border: 0;
+    }
+
+    /* here's our css-grid */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, 100px);
+      /* so we don't use this because we don't know how many rows we
+      will need. we instead use grid-auto-rows because all we know is
+      that we want them to be 100px tall */
+      /* grid-template-rows: repeat(auto-fill, 100px); */
+      grid-auto-rows: 100px;
+    }
+
+    .item {
+      overflow: hidden;
+    }
+
+    .item.v2 {
+      grid-row: span 2;
+    }
+    .item.v3 {
+      grid-row: span 3;
+    }
+    .item.v4 {
+      grid-row: span 4;
+    }
+
+    .item.h2 {
+      grid-column: span 2;
+    }
+    .item.h3 {
+      grid-column: span 3;
+    }
+    .item.h4 {
+      grid-column: span 4;
+    }
+
+
+
+    .overlay {
+      position: fixed;
+      background: rgba(0, 0, 0, 0.7);
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      display: none;
+      z-index: 2;
+    }
+
+    .overlay.open {
+      display: grid;
+    }
+
+    .overlay figure {
+      background: white;
+      width: 700px;
+      padding: 20px;
+    }
+
+    .overlay img {
+      width: 100%;
+    }
+  </style>
+
+  <script>
+    const gallery = document.querySelector('.gallery');
+    const overlay = document.querySelector('.overlay');
+    const overlayImage = overlay.querySelector('img');
+    const overlayClose = overlay.querySelector('.close');
+
+    // destructuring assignment
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
+    function generateHTML([h, v]) {
+      // template literals
+      // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types#String_literals
+
+      // this is so cool, we use ${randomNumber()} to call the function we created to make a random number
+      // in the images folder. we have 12 images so the random number is between 1 and 12
+      return `
+        <div class="item h${h} v${v}">
+          <img src="images/${randomNumber(12)}.jpg">
+          <div class="item__overlay">
+            <button>View →</button>
+          </div>
+        </div>
+      `;
+    }
+
+    function randomNumber(limit) {
+      return Math.floor(Math.random() * limit) + 1;   
+    }
+
+    // we use Array.from to make this neat get an empty array with 50 blank spots thing
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from
+    // Array.from(arrayLikeIterableThingToTurnIntoArray[
+    // , mapFunction[onEveryElementOfArrayDo randomNumber function 1-4, ]);
+    const digits = Array.from({ length: 50 }, () => [randomNumber(4), randomNumber(4)]);
+    console.log(digits);
+
+    // generateHTML is the function we made up top there
+    // we add .join('') to turn it into a string
+    const html = digits.map(generateHTML).join('');
+    console.log(html);
+
+    // https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML
+    gallery.innerHTML = html;
+
+  </script>
+</body>
+
+</html>
