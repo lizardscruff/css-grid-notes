@@ -47,7 +47,7 @@
 
     .close {
       background: none;
-      color: white;
+      color: black;
       border: 0;
     }
 
@@ -60,10 +60,52 @@
       that we want them to be 100px tall */
       /* grid-template-rows: repeat(auto-fill, 100px); */
       grid-auto-rows: 100px;
+      grid-auto-flow: dense;
     }
 
     .item {
       overflow: hidden;
+      display: grid;
+      grid-template-columns: 1;
+      grid-template-rows: 1;
+    }
+
+    /* we overlap .item img and .item__overlay by putting:
+    grid-column and grid-row at the same setting */
+    .item img {
+      grid-column: 1 / -1;
+      grid-row: 1 / -1;
+      /* these kind of make the image take up all the space 
+      and trims some of the excess unnecessary space away */
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .item__overlay {
+      background: #ffc60032;
+      grid-column: 1 / -1;
+      grid-row: 1 / -1;
+      position: relative;
+      display: grid;
+      justify-items: center;
+      align-items: center;
+      /* this makes it animate upon hover */
+      transition: 0.2s;
+      /* this moves the overlay straight down under the box so we can slide it up on mouse hover */
+      transform: translateY(100%);
+    }
+
+    .item__overlay button {
+      background: none;
+      border: 2px solid white;
+      color: white;
+      text-transform: uppercase;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 5px;
+    }
+
+    .item:hover .item__overlay {
+      transform: translateY(0);
     }
 
     .item.v2 {
@@ -75,7 +117,6 @@
     .item.v4 {
       grid-row: span 4;
     }
-
     .item.h2 {
       grid-column: span 2;
     }
@@ -85,8 +126,6 @@
     .item.h4 {
       grid-column: span 4;
     }
-
-
 
     .overlay {
       position: fixed;
@@ -101,9 +140,11 @@
 
     .overlay.open {
       display: grid;
+      align-items: center;
+      justify-items: center;
     }
 
-    .overlay figure {
+    .overlay-inner {
       background: white;
       width: 700px;
       padding: 20px;
@@ -142,20 +183,42 @@
       return Math.floor(Math.random() * limit) + 1;   
     }
 
+    // e stands for event
+    function handleClick(e) {
+      const src = e.currentTarget.querySelector('img').src;
+      overlayImage.src = src;
+      overlay.classList.add('open');
+    }
+
+    function close() {
+      overlay.classList.remove('open');
+    }
+
     // we use Array.from to make this neat get an empty array with 50 blank spots thing
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from
     // Array.from(arrayLikeIterableThingToTurnIntoArray[
     // , mapFunction[onEveryElementOfArrayDo randomNumber function 1-4, ]);
-    const digits = Array.from({ length: 50 }, () => [randomNumber(4), randomNumber(4)]);
-    console.log(digits);
+    // we concat a bunch of 1,1 pictures to fill in blank spaces
+    const digits = Array.from({ length: 50 }, () => 
+      [randomNumber(4), randomNumber(4)]).concat([[1, 1], [1, 1], [1, 1],
+       [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1],
+        [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1],
+         [1, 1]]);
+    // console.log(digits);
 
     // generateHTML is the function we made up top there
     // we add .join('') to turn it into a string
     const html = digits.map(generateHTML).join('');
-    console.log(html);
+    // console.log(html);
 
     // https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML
     gallery.innerHTML = html;
+
+    const items = document.querySelectorAll('.item');
+
+    items.forEach(item => item.addEventListener('click', handleClick));
+
+    overlayClose.addEventListener('click', close);
 
   </script>
 </body>
