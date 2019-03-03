@@ -1,0 +1,46 @@
+body {
+  font-size: 15px;
+}
+
+button {
+  background: #ffc600;
+  border: 0;
+  padding: 10px 20px;
+}
+
+img {
+  max-width: 100%;
+}
+
+/* doing grid-template-areas is recommended by wes to make
+  a responsive layout */
+.top {
+  display: grid;
+  grid-template-areas:
+    "hero hero cta1"
+    "hero hero cta2"
+}
+
+.hero {
+  /* basically you set the areas in the parent up there */
+  /* then you just to grid-area and set it to the name you made */
+  /* it should then fall into place in the grid */
+  grid-area: hero;
+
+  min-height: 400px;
+  background: white url(images/taco.jpg);
+  background-size: cover; 
+  /* this makes the image anchor on the bottom right */
+  /* resize the page larger to see what it does */
+  background-position: bottom right;
+  padding: 50px;
+}
+
+.cta1 {
+  grid-area: cta1;
+}
+
+.cta2 {
+  grid-area: cta2;
+}
+

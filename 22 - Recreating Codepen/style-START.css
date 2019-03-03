@@ -39,6 +39,14 @@ h6 {
   height: 100vh;
 }
 
+/* this is cool */
+/* it adds a tiny black border everywhere like every box */
+/* nice touch! */
+.codepen > * {
+  border: 1px solid black;
+}
+
+/* Pen Header */
 .pen {
   background: black;
   color: white;
@@ -53,6 +61,7 @@ h6 {
   align-items: center;
 }
 
+/* Editor */
 .code {
   background: #1b2b34;
   color: white;
@@ -64,6 +73,38 @@ h6 {
 .editor {
   display: grid;
   grid-template-rows: auto 1fr;
+}
+
+.editor__header {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  padding: 5px;
+  grid-gap: 5px;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.editor__code {
+  display: grid;
+  grid-template-columns: auto 1fr;
+}
+
+/* this is what makes them stack properly */
+.editor__number {
+  display: block;
+  padding: 0 10px;
+}
+
+/* this removes the stuff from the textarea element so it's just blank */
+.editor__input {
+  border: 0;
+  background: none;
+  resize: none;
+  overflow: hidden;
+  color: grey;
+  font-size: 16px;
+  /* this just helps to line it up with the numbers a bit better */
+  line-height: 19px;
 }
 
 .preview {
@@ -105,3 +146,4 @@ h6 {
   font-size: 12px;
   padding: 4px;
 }
+

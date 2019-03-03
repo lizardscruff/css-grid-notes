@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Bootstrappy Grid with CSS Variables!</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+
+<body>
+
+  <div class="grid" style="--cols: 10;">
+    <div class="item">1</div>
+    <div class="item" style="--span: 3;">ZacharyButterfield</div>
+    <div class="item">3</div>
+    <div class="item">4</div>
+  </div>
+
+  <style>
+    .grid {
+      display: grid;
+      grid-gap: 20px;
+      /* 2. but most likely we would use minmax here */
+      grid-template-columns: repeat(var(--cols, 12), minmax(0, 1fr));
+    }
+
+    /* 1. my name takes up a lot of space and stretches the box out */
+    /* so we can use this andmake sure the grid doesn't get jacked up */
+    /* we would then edit the text or whatever is inside if we needed */
+    /* 2. and pop width: 100% down here to get the same result */
+    .item {
+      min-width: 0;
+      width: 100%;
+      /* basically you can make variables to use for all kinds of stuff */
+      --span: 1;
+      grid-column: span var(--span);
+    }
+
+  </style>
+
+</body>
+
+</html>
