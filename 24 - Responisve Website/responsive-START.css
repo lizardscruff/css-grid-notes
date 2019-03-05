@@ -12,10 +12,18 @@ img {
   max-width: 100%;
 }
 
+/* .wrapper */
+
+.wrapper {
+  display: grid;
+  grid-gap: 20px;
+}
+
 /* doing grid-template-areas is recommended by wes to make
   a responsive layout */
 .top {
   display: grid;
+  grid-gap: 20px;
   grid-template-areas:
     "hero hero cta1"
     "hero hero cta2"
@@ -34,6 +42,36 @@ img {
   /* resize the page larger to see what it does */
   background-position: bottom right;
   padding: 50px;
+  /* we want the yellow just to go up to the end of text on
+  "Pretty Good Tacos!" so the best way to do that is to use flexbox */
+  /* not grid like this because if you uncomment this you'll see
+  that it doesn't quite do what we want in the final version */
+  /* display: grid;
+  justify-content: start;
+  align-content: center; */
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+}
+
+/* i believe > * gets all children of this class */
+.hero > * {
+  background: var(--yellow);
+}
+
+.cta {
+  background: var(--yellow);
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  /* "star" this is the one that smushes them right on top of each other */
+  align-content: center;
+}
+
+/* "star" and the margin: 0 here helps too */
+.cta p {
+  margin: 0;
 }
 
 .cta1 {
@@ -44,3 +82,74 @@ img {
   grid-area: cta2;
 }
 
+.price {
+  font-size: 60px;
+  font-weight: 300;
+}
+
+/* Navaigation */
+
+.menu ul {
+  display: grid;
+  grid-gap: 10px;
+  padding: 0;
+  /* this is margin on the top and bottom only */
+  margin: 0;
+  list-style: none;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+}
+
+/* you can grab the links all the way from .menu */
+.menu a {
+  background: var(--yellow);
+  /* default is inline so we have to set it to block to 
+  get the yellow to go all the way over */
+  display: block;
+  text-decoration: none;
+  padding: 10px;
+  text-align: center;
+  color: var(--black);
+  text-transform: uppercase;
+  font-size: 20px;
+}
+
+/* aria-controls is an attribute selector */
+[aria-controls="menu-list"] {
+  display: none;
+}
+
+/* Features */
+
+.features {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.feature {
+  /* don't need a grid always */
+  /* use text-align durp! */
+  text-align: center;
+  background: white;
+  border: 1px solid white;
+  padding: 10px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+}
+
+.feature .icon {
+  font-size: 50px;
+}
+
+.feature p {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+/* About */
+
+.about {
+  background: white;
+  padding: 50px;
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  align-items: center;
+}
