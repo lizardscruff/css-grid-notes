@@ -154,6 +154,65 @@
       font-weight: 100;
       margin: 0;
     }
+
+    .post {
+      display: grid;
+      /* I think it's important in general to start adding max-widths */
+      max-width: 1000px;
+      /* top/bottom 200px margin and centers it with left/right at auto */
+      margin: 200px auto;
+      grid-gap: 10px 50px;
+      grid-template-columns: 3fr 12fr 5fr;
+    }
+
+    /* get everything that is a direct child of the grid */
+    .post > * {
+      /* we do it like this incase we are to add any columns later */
+      /* it basically spans just the center and 2 from the end */
+      grid-column: 2 / -2;
+    }
+
+    /* gets rid of those margins for the photos inside their grid-box */
+    .post > figure {
+      margin: 0;
+      /* full span here */
+      grid-column: 1 / -1;
+    }
+
+    figcaption {
+      font-size: 10px;
+    }
+
+    .post > blockquote {
+      grid-column: 1 / -1;
+      font-size: 60px;
+      font-style: italic;
+      text-align: center;
+      margin: 0;
+    }
+
+    .tip {
+      background: #fafafa;
+      padding: 10px;
+      /* this just kind of fixes the big gap if a tip has lots of information */
+      grid-row: span 5;
+      align-self: start;
+    }
+
+    .tip-left {
+      /* start on the first column and span 1 */
+      grid-column: 1 / span 1;
+      text-align: right;
+      border-right: 2px solid var(--yellow);
+    }
+
+    .tip-right {
+      /* span 1 and end at the last column */
+      grid-column: span 1 / -1;
+      text-align: left;
+      border-left: 2px solid var(--yellow);      
+    }
+
   </style>
 
 </body>
